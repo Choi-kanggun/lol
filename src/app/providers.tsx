@@ -11,7 +11,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function Providers({ children }: Props) {
+const Providers = ({ children }: Props) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -28,4 +28,5 @@ export default function Providers({ children }: Props) {
       {children}
     </QueryClientProvider>
   );
-}
+};
+export default Providers;
