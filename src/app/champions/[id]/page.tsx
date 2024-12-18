@@ -1,6 +1,6 @@
 import Detail from "@/components/detail";
 import { fetchChampionDetail, fetchVersion } from "@/utils/serverApi";
-import Image from "next/image";
+import { Suspense } from "react";
 
 // Props 타입 정의
 type Props = {
@@ -34,6 +34,7 @@ export const generateMetadata = async ({ params }: Props) => {
 };
 
 const ChampionDetailPage = async ({ params }: Props) => {
+  // 챔피언 디테일 정보, 버전 API 호출
   const [response, version] = await Promise.all([
     fetchChampionDetail(params.id),
     fetchVersion(),
@@ -51,7 +52,13 @@ const ChampionDetailPage = async ({ params }: Props) => {
   const championKey = Object.keys(data)[0];
   const champion = data[championKey];
 
-  return <Detail champion={champion} version={version} />;
+  return (
+    <Suspense
+      fallback={<div className="text-center">챔피언 정보 로딩 중...</div>}
+    >
+      <Detail champion={champion} version={version} />
+    </Suspense>
+  );
 };
 
 export default ChampionDetailPage;

@@ -1,5 +1,6 @@
 import ItemList from "@/components/itemList";
 import { fetchItem, fetchVersion } from "@/utils/serverApi";
+import { Suspense } from "react";
 
 export const dynamic = "force-static";
 
@@ -13,6 +14,7 @@ export const generateMetadata = async () => {
 };
 
 const ItemsPage = async () => {
+  // 아이템, 버전 API 함수 호출
   const [items, version] = await Promise.all([fetchItem(), fetchVersion()]);
 
   return (
@@ -20,7 +22,9 @@ const ItemsPage = async () => {
       <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-700 dark:text-gray-100 drop-shadow-md">
         아이템 목록
       </h1>
-      <ItemList items={items} version={version} />
+      <Suspense fallback={<div className="text-center">아이템 로딩중...</div>}>
+        <ItemList items={items} version={version} />
+      </Suspense>
     </div>
   );
 };

@@ -25,6 +25,7 @@ const RotationPage = () => {
   // React Query를 사용하여 버전 데이터를 가져옴
   const {
     data: version,
+    isPending: isVersionPending,
     isError: isVersionError,
     error: versionError,
   } = useQuery<string, Error>({
@@ -37,6 +38,7 @@ const RotationPage = () => {
   // React Query를 사용하여 로테이션 챔피언 데이터를 가져옴
   const {
     data: rotationChampions,
+    isPending: isRotationPending,
     isError: isRotationError,
     error: rotationError,
   } = useQuery<RotationChampionType[]>({
@@ -46,6 +48,17 @@ const RotationPage = () => {
     staleTime: 1000 * 60 * 5, // 5분간 데이터 신선함 유지
     refetchOnWindowFocus: false, // 포커스 시 재요청 방지
   });
+
+  if (isVersionPending || isRotationPending) {
+    return (
+      <section className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="mt-4 text-lg text-gray-600">페이지를 불러오는 중...</p>
+        </div>
+      </section>
+    );
+  }
 
   if (isRotationError) {
     return (
@@ -69,6 +82,7 @@ const RotationPage = () => {
         이번 주 로테이션 챔피언
       </h1>
       {/* 로테이션 챔피언 리스트 */}
+
       <RotationList champions={rotationChampions} version={version} />
     </div>
   );

@@ -1,5 +1,6 @@
 import { ChampionType } from "@/types/Champion";
 import { Item } from "@/types/Item";
+import delay from "./delay";
 
 const endPoint = "https://ddragon.leagueoflegends.com/cdn";
 const versionApi = `https://ddragon.leagueoflegends.com/api/versions.json`;
@@ -7,6 +8,7 @@ const versionApi = `https://ddragon.leagueoflegends.com/api/versions.json`;
 // 버전 데이터를 가져오는 API
 export const fetchVersion = async (): Promise<string> => {
   try {
+    await delay(2000);
     const response = await fetch(`${versionApi}`);
     if (!response.ok) {
       throw new Error(`버전 데이터 요청 실패: ${response.status}`);
@@ -24,6 +26,7 @@ export const fetchVersion = async (): Promise<string> => {
 // 챔피언 데이터를 가져오는 API
 export const fetchChampion = async (): Promise<ChampionType[] | undefined> => {
   try {
+    await delay(2000);
     const version = await fetchVersion(); // 최신 버전을 가져옴
     const response = await fetch(
       `${endPoint}/${version}/data/ko_KR/champion.json`,
@@ -46,6 +49,7 @@ export const fetchChampionDetail = async (
   id: string
 ): Promise<{ data: Record<string, ChampionType> } | undefined> => {
   try {
+    await delay(2000);
     const version = await fetchVersion(); // 최신 버전을 가져옴
     const response = await fetch(
       `${endPoint}/${version}/data/ko_KR/champion/${id}.json`
@@ -65,6 +69,7 @@ export const fetchChampionDetail = async (
 // 아이템 데이터를 가져오는 API
 export const fetchItem = async (): Promise<Item[]> => {
   try {
+    await delay(2000);
     const version = await fetchVersion(); // 최신 버전을 가져옴
     const response = await fetch(`${endPoint}/${version}/data/ko_KR/item.json`);
 

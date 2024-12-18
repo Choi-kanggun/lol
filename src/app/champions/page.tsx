@@ -1,5 +1,6 @@
 import ChampionList from "@/components/championList";
 import { fetchChampion, fetchVersion } from "@/utils/serverApi";
+import { Suspense } from "react";
 
 // 동적으로 메타데이터를 생성하는 함수
 export const generateMetadata = async () => {
@@ -18,7 +19,11 @@ const ChampionsPage = async () => {
       <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-700 dark:text-gray-100 drop-shadow-md">
         챔피언 목록
       </h1>
-      <ChampionList data={data} version={version} />
+      <Suspense
+        fallback={<div className="text-center">챔피언 목록 로딩 중...</div>}
+      >
+        <ChampionList data={data} version={version} />
+      </Suspense>
     </div>
   );
 };

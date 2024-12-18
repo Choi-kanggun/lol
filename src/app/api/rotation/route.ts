@@ -1,5 +1,6 @@
 import { ChampionType } from "@/types/Champion";
 import { ChampionRotation } from "@/types/ChampionRotation";
+import delay from "@/utils/delay";
 import { fetchChampion } from "@/utils/serverApi";
 import { NextResponse } from "next/server";
 
