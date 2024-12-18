@@ -23,7 +23,6 @@ const fetchRotationChampion = async (): Promise<ChampionType[]> => {
 const RotationPage = () => {
   const {
     data: version,
-    isPending: isVersionPending,
     isError: isVersionError,
     error: versionError,
   } = useQuery<string, Error>({
@@ -35,7 +34,6 @@ const RotationPage = () => {
 
   const {
     data: rotationChampions,
-    isPending: isRotationPending,
     isError: isRotationError,
     error: rotationError,
   } = useQuery<RotationChampionType[]>({
@@ -45,10 +43,6 @@ const RotationPage = () => {
     staleTime: 1000 * 60 * 5, // 5분간 데이터 신선함 유지
     refetchOnWindowFocus: false, // 포커스 시 재요청 방지
   });
-
-  if (isRotationPending || isVersionPending) {
-    return <div className="text-center text-lg mt-8">Loading...</div>;
-  }
 
   if (isRotationError) {
     return (
