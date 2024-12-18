@@ -20,13 +20,32 @@ const RootLayout = ({
   return (
     <html lang="ko" className="bg-gray-100">
       <body className={`bg-gray-100 text-gray-800 ${inter.className}`}>
-        {/* Header */}
         <header className="fixed top-0 left-0 right-0 z-50 bg-gray-800 shadow-md text-white dark:bg-gray-800 dark:text-gray-100">
-          <nav className="flex justify-center">
-            <ul className="flex flex-row space-x-24 py-4">
+          <nav className="relative flex items-center justify-between p-4">
+            {/* 로고 */}
+            <div className="text-lg font-bold">League App</div>
+
+            {/* 햄버거 */}
+            <input
+              type="checkbox"
+              id="menu-toggle"
+              className="hidden peer"
+              aria-label="Toggle navigation"
+            />
+            <label
+              htmlFor="menu-toggle"
+              className="cursor-pointer block md:hidden"
+            >
+              <span className="block w-6 h-1 bg-white mb-1"></span>
+              <span className="block w-6 h-1 bg-white mb-1"></span>
+              <span className="block w-6 h-1 bg-white"></span>
+            </label>
+
+            {/* 메뉴 */}
+            <ul className="hidden peer-checked:flex md:flex flex-col md:flex-row md:space-x-8 items-center bg-gray-800 md:bg-transparent absolute md:static top-12 left-0 right-0 md:top-auto md:left-auto md:right-auto">
               <li>
                 <Link
-                  className="hover:text-yellow-300 font-semibold text-lg transition duration-200"
+                  className="block py-2 px-4 hover:text-yellow-300 font-semibold text-lg transition duration-200"
                   href={"/"}
                 >
                   홈
@@ -34,7 +53,7 @@ const RootLayout = ({
               </li>
               <li>
                 <Link
-                  className="hover:text-yellow-300 font-semibold text-lg transition duration-200"
+                  className="block py-2 px-4 hover:text-yellow-300 font-semibold text-lg transition duration-200"
                   href={"/champions"}
                 >
                   챔피언 목록
@@ -42,7 +61,7 @@ const RootLayout = ({
               </li>
               <li>
                 <Link
-                  className="hover:text-yellow-300 font-semibold text-lg transition duration-200"
+                  className="block py-2 px-4 hover:text-yellow-300 font-semibold text-lg transition duration-200"
                   href={"/items"}
                 >
                   아이템 목록
@@ -50,14 +69,17 @@ const RootLayout = ({
               </li>
               <li>
                 <Link
-                  className="hover:text-yellow-300 font-semibold text-lg transition duration-200"
+                  className="block py-2 px-4 hover:text-yellow-300 font-semibold text-lg transition duration-200"
                   href={"/rotation"}
                 >
                   로테이션 챔피언
                 </Link>
               </li>
+              <li className="mt-4 md:mt-0">
+                {/* 다크모드 */}
+                <Theme />
+              </li>
             </ul>
-            <Theme />
           </nav>
         </header>
         <Providers>
