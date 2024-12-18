@@ -48,14 +48,6 @@ const RootLayout = ({
               <li>
                 <Link
                   className="block py-2 px-4 hover:text-yellow-300 font-semibold text-lg transition duration-200"
-                  href={"/"}
-                >
-                  홈
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="block py-2 px-4 hover:text-yellow-300 font-semibold text-lg transition duration-200"
                   href={"/champions"}
                 >
                   챔피언 목록
