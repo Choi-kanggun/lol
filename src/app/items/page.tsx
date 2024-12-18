@@ -14,8 +14,7 @@ export const generateMetadata = async () => {
 };
 
 const ItemsPage = async () => {
-  const items: Omit<Item, "description" | "stats">[] = await fetchItem();
-  const version: string = await fetchVersion();
+  const [items, version] = await Promise.all([fetchItem(), fetchVersion()]);
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 px-32 py-12">

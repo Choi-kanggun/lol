@@ -13,8 +13,7 @@ export const generateMetadata = async () => {
 };
 
 const ChampionsPage = async () => {
-  const data: ChampionType[] | undefined = await fetchChampion();
-  const version: string = await fetchVersion();
+  const [data, version] = await Promise.all([fetchChampion(), fetchVersion()]);
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 px-32 py-12">
