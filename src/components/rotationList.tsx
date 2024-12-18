@@ -12,6 +12,7 @@ const RotationList = ({
   return (
     <div>
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {/* 로테이션 챔피언 리스트 */}
         {champions?.map((champ) => (
           <Link key={champ.id} href={`/champions/${champ.id}`}>
             <li className="flex flex-col items-center bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out p-6">

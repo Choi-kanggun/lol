@@ -12,6 +12,7 @@ export async function GET() {
   }
 
   try {
+    await delay(2000);
     // Riot API를 통해 챔피언 로테이션 데이터를 가져옴
     const response = await fetch(
       "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations",
