@@ -1,14 +1,17 @@
 import { fetchChampionDetail, fetchVersion } from "@/utils/serverApi";
 import Image from "next/image";
 
+// Props 타입 정의
 type Props = {
   params: {
     id: string;
   };
 };
 
+// 동적으로 메타데이터를 생성하는 함수
 export const generateMetadata = async ({ params }: Props) => {
   const response = await fetchChampionDetail(params.id);
+  // 데이터가 없는 경우 기본 메타데이터 반환
   if (!response) {
     return {
       title: "챔피언 디테일 정보",
@@ -20,11 +23,11 @@ export const generateMetadata = async ({ params }: Props) => {
   const champion = data[championKey];
 
   return {
-    title: `${champion.name} - ${champion.title}`,
-    description: champion.blurb,
+    title: `${champion.name} - ${champion.title}`, // 페이지 제목
+    description: champion.blurb, // 챔피언 설명
     openGraph: {
-      title: `${champion.name} - ${champion.title}`,
-      description: champion.blurb,
+      title: `${champion.name} - ${champion.title}`, // Open Graph 제목
+      description: champion.blurb, // Open Graph 설명
     },
   };
 };
@@ -77,7 +80,7 @@ const ChampionDetailPage = async ({ params }: Props) => {
           {champion.blurb}
         </p>
 
-        {/* 스탯 섹션 */}
+        {/* 스탯 정보 */}
         <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-6 shadow-inner">
           <h3 className="text-2xl font-semibold text-gray-700 dark:text-gray-200 text-center mb-4">
             스탯

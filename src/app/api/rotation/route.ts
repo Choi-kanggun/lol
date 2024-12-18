@@ -11,6 +11,7 @@ export async function GET() {
   }
 
   try {
+    // Riot API를 통해 챔피언 로테이션 데이터를 가져옴
     const response = await fetch(
       "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations",
       {
@@ -31,6 +32,7 @@ export async function GET() {
       ) || [];
     return NextResponse.json(rotationChampions);
   } catch (err) {
+    // 에러 발생 시 로그 출력 및 에러 응답 반환
     console.error(err);
     return NextResponse.json(
       { error: "챔피언 데이터 불러오기 에러" },

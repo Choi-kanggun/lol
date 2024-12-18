@@ -6,11 +6,13 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 
+// 로테이션 챔피언 타입 정의
 export type RotationChampionType = Pick<
   ChampionType,
   "id" | "name" | "title" | "image"
 >;
 
+// 로테이션 챔피언 데이터를 가져오는 함수
 const fetchRotationChampion = async (): Promise<ChampionType[]> => {
   const response = await fetch("/api/rotation");
 
@@ -21,25 +23,27 @@ const fetchRotationChampion = async (): Promise<ChampionType[]> => {
 };
 
 const RotationPage = () => {
+  // React Query를 사용하여 버전 데이터를 가져옴
   const {
     data: version,
     isError: isVersionError,
     error: versionError,
   } = useQuery<string, Error>({
     queryKey: ["version"],
-    queryFn: fetchVersion,
+    queryFn: fetchVersion, // 버전 정보를 가져오는 함수
     staleTime: 1000 * 60 * 5, // 5분간 데이터 신선함 유지
     refetchOnWindowFocus: false, // 포커스 시 재요청 방지
   });
 
+  // React Query를 사용하여 로테이션 챔피언 데이터를 가져옴
   const {
     data: rotationChampions,
     isError: isRotationError,
     error: rotationError,
   } = useQuery<RotationChampionType[]>({
     queryKey: ["rotationChampion"],
-    queryFn: fetchRotationChampion,
-    enabled: !!version,
+    queryFn: fetchRotationChampion, // 로테이션 챔피언 정보를 가져오는 함수
+    enabled: !!version, // 버전 데이터가 있을 때만 실행
     staleTime: 1000 * 60 * 5, // 5분간 데이터 신선함 유지
     refetchOnWindowFocus: false, // 포커스 시 재요청 방지
   });
@@ -61,11 +65,14 @@ const RotationPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 px-32 py-12">
+      {/* 페이지 제목 */}
       <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-700 dark:text-gray-100 drop-shadow-md">
         이번 주 로테이션 챔피언
       </h1>
+      {/* 로테이션 챔피언 리스트 */}
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {rotationChampions?.map((champ) => (
+          // 챔피언 상세 페이지로 연결되는 링크
           <Link key={champ.id} href={`/champions/${champ.id}`}>
             <li className="flex flex-col items-center bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out p-6">
               <Image
