@@ -6,6 +6,12 @@
 
 <br/>
 
+# 📌 프로젝트 소개
+- Riot Games의 API와 Data Dragon을 활용하여 LOL의 다양한 데이터를 조회하고, 이를 기반으로 웹 애플리케이션을 직접 만들어 보기
+- Next.js와 TypeScript를 사용하여 프론트엔드 개발의 기본기 다지기
+- 타입 선언 방법, useState에서 제네릭 사용, 유틸리티 타입 활용
+- 동적 라우팅, App Router, 레이아웃 구성, Route Handler 등 Next.js의 핵심 기능 다루기
+
 # 🕹️ 프로젝트 기능
 ### 1️⃣ 성능 최적화
 - Next.js의 <image> 컴포넌트를 활용하여 이미지 로딩 최적화 및 자동 서식 변경 적용
