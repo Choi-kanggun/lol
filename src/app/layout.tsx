@@ -24,7 +24,7 @@ const RootLayout = ({
           <nav className="relative flex items-center justify-between p-4">
             {/* 로고 */}
             <Link href={"/"}>
-              <div className="text-lg font-bold">League App</div>
+              <div className="text-lg font-bold">LOL App</div>
             </Link>
 
             {/* 햄버거 */}
